@@ -1,0 +1,7 @@
+.video-rec {
+  width: 70%;
+  background-color: gray;
+}
+.rec-actions button {
+  text-transform: capitalize;
+}

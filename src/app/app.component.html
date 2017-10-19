@@ -1,8 +1,5 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1>
-    Welcome to my webRTC demo app!
-  </h1>
-  <button (click)="stopStream()">Stop Streaming</button>
-  <video #hardwareVideo autoplay></video>
+  <h2> Welcome to my webRTC demo app! </h2>
+  <app-rtc-media-recorder [format]="format" [constrains]="constrains">
+  </app-rtc-media-recorder>
 </div>
