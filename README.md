@@ -1,5 +1,8 @@
 # NgWebrtcDemo
 
+Available components:
+- RtcMediaRecorderComponent, currently available using <app-rtc-media-recorder> and accepts format and constrains inputs.
+    
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.5.
 
 
@@ -10,9 +13,6 @@ webRTC references:
 - http://webrtc-security.github.io/
 - https://melavi.de/811/
 - codelab: https://codelabs.developers.google.com/codelabs/webrtc-web/#0
-
-API's used in this demo:
-* getUserMedia: enabling a browser to access a user's camera and microphone. 
 
 
 ## Development server
