@@ -5,3 +5,8 @@
 .rec-actions button {
   text-transform: capitalize;
 }
+.hide-video-player {
+  visibility: hidden;
+  height: 0;
+  width: 0;
+}

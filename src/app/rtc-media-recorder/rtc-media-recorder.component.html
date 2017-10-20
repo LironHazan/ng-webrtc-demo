@@ -1,11 +1,11 @@
 <div class="rec-player">
-  <video class="video-rec" #recVideo autoplay muted controls></video>
+  <video [ngClass]="{'hide-video-player': !showVideoPlayer}" class="video-rec" #recVideo autoplay muted controls></video>
   <div class="rec-actions">
     <div *ngIf="hideStopBtn">
-      <button (click)="start()"> record </button>
-      <button (click)="play()"> play </button>
-      <button (click)="download()"> download </button>
+      <button (click)="start()"> Start recording </button>
+      <button *ngIf="showVideoPlayer && recordedBlobs" (click)="play()"> Play </button>
+      <button *ngIf="recordedBlobs" (click)="download()"> Download </button>
     </div>
-    <button *ngIf="!hideStopBtn" (click)="stop()"> stop </button>
+    <button *ngIf="!hideStopBtn" (click)="stop()"> Stop </button>
   </div>
 </div>

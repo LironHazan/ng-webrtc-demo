@@ -1,8 +1,88 @@
 # NgWebrtcDemo
 
 Available components:
-- RtcMediaRecorderComponent, currently available using <app-rtc-media-recorder> and accepts format and constrains inputs.
-    
+- RtcMediaRecorderComponent, currently available using as follows:
+ 
+` <app-rtc-media-recorder [constrains]="constrains"
+   [showVideoPlayer]="false" [fileName]="my_recorded_stream_file"
+   (startRecording)="announceStart($event)" (fetchRecording)="handleVideoStream($event)">
+   </app-rtc-media-recorder> `
+
+## options:
+#### [constrains]
+_object_
+
+Instruct the browser if to record video/audio or both, default value is {video: true, audio: false}
+
+```
+[constrains]="constrains"
+
+```
+#### [showVideoPlayer]
+_boolean_
+
+When set to 'false', the video player element won't be visible, default value is 'true'
+
+```
+[showVideoPlayer]="false"
+
+```
+#### [fileName]
+_string_
+
+Default value is 'my_recording'
+
+```
+[fileName]="fileName"
+
+```   
+#### (startRecording)
+
+Can be used for toasting that recording had started
+
+First define callback function in your controller,
+```
+  announceStart() {
+    alert('Start recording!');
+  }
+```
+
+And then use it in your template:
+``` 
+(startRecording)="announceStart($event)"
+```
+#### (fetchRecording)
+
+Can be used for fetching the recording when stopping the recorder
+
+First define callback function in your controller,
+```
+  handleVideoStream(blob) {
+    // can send it to a server or play in another video player etc..
+    console.log('do something with the recording' + blob);
+  }
+```
+
+And then use it in your template:
+``` 
+(fetchRecording)="handleVideoStream($event)"
+```
+#### (downloadRecording)
+
+Can be used for toasting that the file was downloaded
+
+First define callback function in your controller,
+```
+  announceDownload() {
+    alert('Start recording!');
+  }
+```
+
+And then use it in your template:
+``` 
+(downloadRecording)="announceDownload($event)"
+```
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.5.
 
 

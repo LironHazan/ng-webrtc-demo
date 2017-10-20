@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RtcMediaRecorderService } from './rtc-media-recorder/rtc-media-recorder.service';
 import { AppComponent } from './app.component';
 import { RtcMediaRecorderComponent } from './rtc-media-recorder/rtc-media-recorder.component';
 
@@ -13,7 +12,7 @@ import { RtcMediaRecorderComponent } from './rtc-media-recorder/rtc-media-record
   imports: [
     BrowserModule
   ],
-  providers: [RtcMediaRecorderService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

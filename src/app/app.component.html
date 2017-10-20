@@ -1,6 +1,7 @@
 <div style="text-align:center">
   <h2> Welcome to my webRTC demo app! </h2>
-  <app-rtc-media-recorder [format]="format" [constrains]="constrains"
-  (startRecording)="announceStart($event)">
+  <app-rtc-media-recorder [constrains]="constrains"
+  [showVideoPlayer]="showVideoPlayer"
+  (startRecording)="announceStart($event)" (fetchRecording)="handleVideoStream($event)">
   </app-rtc-media-recorder>
 </div>
