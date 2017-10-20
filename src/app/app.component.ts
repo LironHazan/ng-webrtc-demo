@@ -1,4 +1,5 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+// import { RtcMediaRecorderComponent } from './rtc-media-recorder/rtc-media-recorder.component';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,13 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 export class AppComponent implements OnInit {
   format = 'video/webm';
   constrains = {video: true, audio: false};
-  ngOnInit() {
+
+  constructor() {}
+
+  ngOnInit() {}
+
+  announceStart() {
+    alert('Start recording!');
+   // this.rtcMediaRecorderComponent.sendRecording('', '');
   }
 }

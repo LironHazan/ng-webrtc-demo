@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { NgIf } from '@angular/common';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+// import { RtcMediaRecorderService } from './rtc-media-recorder.service';
 
 @Component({
   selector: 'app-rtc-media-recorder',
@@ -8,14 +8,26 @@ import { NgIf } from '@angular/common';
 })
 export class RtcMediaRecorderComponent implements OnInit {
   @ViewChild('recVideo') recVideo: any;
+
   @Input() format = 'video/webm';
   @Input() constrains = {video: true, audio: true};
+  @Input() sendTo = null;
+  @Input() fileNamePattern = '_my_record.webm';
+
+  // inform the consumer app of following actions
+  @Output() startRecording = new EventEmitter();
+  @Output() stopRecording = new EventEmitter();
+  @Output() downloadRecording = new EventEmitter();
+
+
+
   _navigator = <any> navigator;
   localStream;
   video;
   mediaRecorder;
   recordedBlobs;
-  showStartBtn = true;
+  hideStopBtn = true;
+
   constructor() { }
 
   ngOnInit() {
@@ -26,7 +38,7 @@ export class RtcMediaRecorderComponent implements OnInit {
     || this._navigator.mozGetUserMedia || this._navigator.msGetUserMedia );
   }
 
-  initStream(constrains, navigator) {
+  private initStream(constrains, navigator) {
     return navigator.mediaDevices.getUserMedia(constrains)
       .then((stream) => {
         this.localStream = stream;
@@ -34,8 +46,14 @@ export class RtcMediaRecorderComponent implements OnInit {
       })
       .catch(err => err);
   }
+  private stopStream() {
+    const tracks = this.localStream.getTracks();
+    tracks.forEach((track) => {
+      track.stop();
+    });
+  }
 
-  start() {
+  public start() {
     console.log('start recording');
     this.recordedBlobs = [];
     this.initStream(this.constrains, this._navigator)
@@ -47,12 +65,13 @@ export class RtcMediaRecorderComponent implements OnInit {
         try {
           this.mediaRecorder = new window['MediaRecorder'](this.localStream, {mimeType: this.format});
           this.video.src = stream;
+          this.startRecording.emit(this.video.src);
         } catch (e) {
           console.error('Exception while creating MediaRecorder: ' + e);
           return;
         }
         console.log('Created MediaRecorder', this.mediaRecorder, 'with options', this.format);
-        this.showStartBtn = false;
+        this.hideStopBtn = false;
         this.mediaRecorder.ondataavailable =
           (event) => {
             if (event.data && event.data.size > 0) {
@@ -62,22 +81,23 @@ export class RtcMediaRecorderComponent implements OnInit {
       });
   }
 
-  stop() {
+  public stop() {
     console.log('stop recording');
+    this.stopRecording.emit();
     this.stopStream();
     this.mediaRecorder.stop();
-    this.showStartBtn = true;
+    this.hideStopBtn = true;
     console.log('Recorded Blobs: ', this.recordedBlobs);
     this.video.controls = true;
   }
 
-  play() {
+  public play() {
     console.log('play recorded stream');
     const superBuffer = new Blob(this.recordedBlobs, {type: this.format});
     this.video.src = window.URL.createObjectURL(superBuffer);
   }
 
-  download() {
+  public download() {
     console.log('download recorded stream');
     const timestamp = new Date().getUTCMilliseconds();
     const blob = new Blob(this.recordedBlobs, {type: this.format});
@@ -85,20 +105,27 @@ export class RtcMediaRecorderComponent implements OnInit {
     const a = document.createElement('a');
     a.style.display = 'none';
     a.href = url;
-    a.download = timestamp + '_my_record.webm';
+    a.download = timestamp + this.fileNamePattern;
     document.body.appendChild(a);
     a.click();
-    setTimeout(function() {
+    setTimeout(() => {
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
+      this.downloadRecording.emit();
     }, 100);
   }
 
-  stopStream() {
-    const tracks = this.localStream.getTracks();
-    tracks.forEach((track) => {
-      track.stop();
-    });
-  }
+  /**
+   * Responsible for sending the recorded srteam to the dest server
+   * @param url
+   * @param record
+   */
+  // public sendRecording(url, record) {
+  //   if (!this.sendTo) { return; }
+  //   this.rtcMediaRecorderService.postRecordToServer(url, record)
+  //     .then((response) => {
+  //     console.log('success');
+  //     }).catch((err) => { console.log(err); });
+  // }
 
 }
