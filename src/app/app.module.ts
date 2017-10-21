@@ -1,16 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { RtcMediaRecorderComponent } from './rtc-media-recorder/rtc-media-recorder.component';
+import { RtcMediaRecorderModule } from '../rtc-media-recorder/rtc-media-recorder.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RtcMediaRecorderComponent
   ],
-  exports: [RtcMediaRecorderComponent],
   imports: [
-    BrowserModule
+    BrowserModule, RtcMediaRecorderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,7 +8,7 @@ import {Component, OnInit} from '@angular/core';
 export class AppComponent implements OnInit {
   format = 'video/webm';
   constrains = {video: true, audio: false};
-  showVideoPlayer = false;
+  showVideoPlayer = true;
 
   constructor() {}
 
