@@ -1,7 +1,11 @@
 # NgWebrtcDemo
 
+While exploring webrtc abilities and related API's I encapsulated some of those abilities by Angular modules for quick and easy development experience.
+
 Available components:
-- RtcMediaRecorderComponent, currently available using as follows:
+
+- RtcMediaRecorderComponent:
+  - Add RtcMediaRecorderModule to app module imports and start using in your component templates   
  
 ` <app-rtc-media-recorder [constrains]="constrains"
    [showVideoPlayer]="false" [fileName]="my_recorded_stream_file"
@@ -82,6 +86,8 @@ And then use it in your template:
 ``` 
 (downloadRecording)="announceDownload($event)"
 ```
+
+** Supported browsers are Chrome and Firefox.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.5.
 
