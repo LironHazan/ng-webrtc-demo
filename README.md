@@ -1,6 +1,6 @@
 # NgWebrtcDemo
 
-The demo application uses the RtcMediaRecorderModule which encapsulate a use of the getUserMedia and MediaRecorder APIs for using the camera + microphone and record the stream.
+The [demo application](https://lironhazan.github.io/ng-webrtc-demo/) uses the RtcMediaRecorderModule which encapsulate a use of the getUserMedia and MediaRecorder APIs for using the camera + microphone and record the stream.
 
 
 Available components:
