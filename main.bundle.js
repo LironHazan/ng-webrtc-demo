@@ -25,7 +25,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".webrtc-demo-app {\n  font-family: Arial, Helvetica, sans-serif;\n  text-align: center;\n}\nh1 {\n  color: #369;\n  font-family: Arial, Helvetica, sans-serif;\n  font-size: 250%;\n}\nh2, h3 {\n  color: #444;\n  font-family: Arial, Helvetica, sans-serif;\n  font-weight: lighter;\n}\n", ""]);
 
 // exports
 
@@ -38,7 +38,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"text-align:center\">\n  <h2> Welcome to my webRTC demo app! </h2>\n  <ng-rtc-media-recorder [constrains]=\"constrains\"\n  [showVideoPlayer]=\"showVideoPlayer\"\n  (startRecording)=\"announceStart($event)\" (fetchRecording)=\"handleVideoStream($event)\">\n  </ng-rtc-media-recorder>\n</div>\n"
+module.exports = "<div class=\"webrtc-demo-app\">\n  <h1> Angular webRTC recorder demo app </h1>\n  <hr>\n\n  <div>\n    <h2> RtcMediaRecorderComponent in practice</h2>\n    <ng-rtc-media-recorder [constrains]=\"constrains\"\n                           (startRecording)=\"announceStart($event)\" (fetchRecording)=\"handleVideoStream($event)\">\n    </ng-rtc-media-recorder>\n  </div>\n  <hr>\n  <div>\n    <h2> RtcMediaRecorderComponent (showVideoPlayer=false) </h2>\n    <ng-rtc-media-recorder [constrains]=\"constrains\"\n                           [showVideoPlayer]=\"false\"\n                           (startRecording)=\"announceStart($event)\" (fetchRecording)=\"handleVideoStream($event)\">\n    </ng-rtc-media-recorder>\n  </div>\n  <hr>\n</div>\n"
 
 /***/ }),
 
@@ -62,7 +62,6 @@ var AppComponent = (function () {
     function AppComponent() {
         this.format = 'video/webm';
         this.constrains = { video: true, audio: false };
-        this.showVideoPlayer = true;
     }
     AppComponent.prototype.ngOnInit = function () { };
     AppComponent.prototype.handleVideoStream = function (blob) {
@@ -175,7 +174,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".video-rec {\n  width: 70%;\n  background-color: gray;\n}\n.rec-actions button {\n  text-transform: capitalize;\n}\n.hide-video-player {\n  visibility: hidden;\n  height: 0;\n  width: 0;\n}\n", ""]);
+exports.push([module.i, ".video-rec {\n  width: 70%;\n  background-color: gray;\n}\n.rec-actions button {\n  text-transform: capitalize;\n}\n.hide-video-player {\n  visibility: hidden;\n  height: 0;\n  width: 0;\n}\nbutton {\n  cursor: pointer;\n  background-color: #444;\n  color: white;\n  border: none;\n  border-radius: 3px;\n}\nbutton:hover {\n  background-color: black;\n\n}\n", ""]);
 
 // exports
 
