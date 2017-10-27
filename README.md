@@ -1,16 +1,17 @@
 # NgWebrtcDemo
 
-While exploring webrtc abilities and related API's I encapsulated some of those abilities by Angular modules for quick and easy development experience.
+The demo application uses the RtcMediaRecorderModule which encapsulate a use of the getUserMedia and MediaRecorder APIs for using the camera + microphone and record the stream.
+
 
 Available components:
 
-- RtcMediaRecorderComponent:
+- *RtcMediaRecorderComponent*:
   - Add RtcMediaRecorderModule to app module imports and start using in your component templates   
  
-` <app-rtc-media-recorder [constrains]="constrains"
+` <ng-rtc-media-recorder [constrains]="constrains"
    [showVideoPlayer]="false" [fileName]="my_recorded_stream_file"
    (startRecording)="announceStart($event)" (fetchRecording)="handleVideoStream($event)">
-   </app-rtc-media-recorder> `
+   </ng-rtc-media-recorder> `
 
 ## options:
 #### [constrains]

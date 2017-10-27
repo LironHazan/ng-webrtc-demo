@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-rtc-media-recorder',
+  selector: 'ng-rtc-media-recorder',
   templateUrl: './rtc-media-recorder.component.html',
   styleUrls: ['./rtc-media-recorder.component.css']
 })
