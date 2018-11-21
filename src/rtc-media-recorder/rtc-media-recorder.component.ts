@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import {Component, ViewChild, Input, Output, EventEmitter, AfterViewInit} from '@angular/core';
 
 @Component({
   selector: 'ng-rtc-media-recorder',
   templateUrl: './rtc-media-recorder.component.html',
   styleUrls: ['./rtc-media-recorder.component.css']
 })
-export class RtcMediaRecorderComponent implements OnInit {
+export class RtcMediaRecorderComponent implements AfterViewInit {
   @ViewChild('recVideo') recVideo: any;
 
   @Input() constrains = {video: true, audio: true};
@@ -26,7 +26,7 @@ export class RtcMediaRecorderComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
+  ngAfterViewInit() {
     console.log('creating MediaRecorder for mimeType: ' + this.format);
     if (this.recVideo) {
       this.video = this.recVideo.nativeElement;
@@ -44,8 +44,8 @@ export class RtcMediaRecorderComponent implements OnInit {
       })
       .catch(err => err);
   }
-  private _stopStream() {
-    const tracks = this.localStream.getTracks();
+  private _stopStream(stream) {
+    const tracks = stream.getTracks();
     tracks.forEach((track) => {
       track.stop();
     });
@@ -85,7 +85,7 @@ export class RtcMediaRecorderComponent implements OnInit {
     console.log('stop recording');
     this.hideStopBtn = true;
 
-    this._stopStream();
+    this._stopStream(this.localStream);
     this.mediaRecorder.stop();
     this.fetchRecording.emit(this.recordedBlobs);
     if (this.video) {
